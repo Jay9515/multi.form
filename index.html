@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-step-form</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="item item-1 active " > <p>1</p><small>account setup</small> </div>
+            <div class="item item-2 "><hr><p>2</p><small>social profile</small></div>
+            <div class="item item-3 "><hr><p>3</p><small>Personal Details</small>
+            </div>
+
+        </div>
+
+        <!-- <h1>asdf</h1> -->
+      <form>
+        <!-- <h1>asf</h1> -->
+        <div class="card">
+            <div class="card-heading">
+
+                <h4>Create your account</h4>
+                <p><small>This is step 1</small></p>
+            </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" />
+
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Confirm Password" />
+
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-next">Next</button>
+            <!-- <button type="button" class="btn-next">next</button> -->
+
+          </div>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+
+                <h4>social profile</h4>
+                <p><small>Your presence on the social network</small></p>
+            </div>
+          <div class="form-group">
+            <input type="text" placeholder="Twitter" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Facebook" />
+
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Google Plus" />
+
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-prev">Previous</button>
+
+            <button type="button" class="btn-next">Next</button>
+            <!-- <button type="button" class="btn-next">next</button> -->
+
+          </div>
+        </div>
+
+        <div class="card">
+            <div class="card-heading">
+
+                <h4>personal details</h4>
+                <p><small>We will never sell it</small></p>
+            </div>
+          <div class="form-group">
+            <input type="text" placeholder="First Name" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Last Name" />
+
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Phone" />
+
+          </div>
+          <div class="form-group">
+            <textarea  placeholder="Address" rows="2"></textarea>
+
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-prev">Previous</button>
+            <button type="submit" class="btn-submit">submit</button>
+
+            <!-- <button type="button" class="btn-next">Next</button> -->
+            <!-- <button type="button" class="btn-next">next</button> -->
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+
+    <script>
+        let card = [...document.querySelectorAll('.card')]
+let progressItems = [...document.querySelectorAll('.item')]
+console.log(progressItems)
+// let card = document.querySelectorAll('.card')
+// let curr=0;
+// for(let i=0; i<card.length;i++){
+//     let x = card[i].classList.contains('active');
+//     if(x){
+//         curr=i;
+//     }
+// }
+// console.log(curr)
+
+
+let curr = card.findIndex(element=>{
+    return element.classList.contains('active')
+})
+
+if(curr<0){
+    curr=0
+    card[curr].classList.add('active')
+}
+
+document.querySelector("form").addEventListener('click',event=>{
+
+    if(event.target.matches('.btn-next')){
+        curr+=1;
+        showNext(curr-1,curr);
+        showProgress(curr);
+    }
+    else if(event.target.matches('.btn-prev')){
+        removeProgress(curr);
+        curr-=1;
+        showNext(curr+1,curr);
+    }
+    // console.log(curr)
+
+})
+function removeProgress(curr){
+    progressItems[curr].classList.remove('active')
+
+}
+function showProgress(curr){
+    progressItems[curr].classList.add('active')
+}
+
+function showNext(prev,curr){
+    card[curr].classList.add('active')
+    card[prev].classList.remove('active')
+
+    // console.log(number)
+    // if(number<0){
+    //     number=0
+    // }
+    // else{
+
+    //     number = number%card.length;
+    // }
+    // if(number>0){
+
+    //     card[number-1].classList.remove("active")
+    // }
+
+    // card[number].classList.add('active');
+    // if(number<card.length){
+    // card[number+1].classList.remove('active')
+    // }
+
+
+}
+    </script>
+
+
+ 
+  </body>
+</html>
